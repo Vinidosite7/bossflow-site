@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  color-scheme: dark;
+}
+
+html, body, #root { height: 100%; }
+
+body{
+  margin: 0;
+  background: radial-gradient(1200px 700px at 20% 10%, rgba(109,94,246,0.22), transparent 60%),
+              radial-gradient(900px 550px at 90% 10%, rgba(34,211,238,0.14), transparent 55%),
+              #070A12;
+  color: #EAF0FF;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+/* ---- micro animations (premium SaaS feel) ---- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.anim-fade-up { animation: fadeUp 600ms ease-out both; }
+.anim-delay-1 { animation-delay: 80ms; }
+.anim-delay-2 { animation-delay: 160ms; }
+.anim-delay-3 { animation-delay: 240ms; }
+.anim-delay-4 { animation-delay: 320ms; }
+
+.anim-floaty { animation: floaty 5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up, .anim-floaty { animation: none !important; }
+}
