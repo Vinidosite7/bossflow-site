@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { appRegisterUrl } from "../lib/links";
+import { appLoginUrl, appRegisterUrl } from "../lib/links";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
@@ -73,7 +73,7 @@ export default function MarketingTopbar({ active }: Props) {
           {/* Ações */}
           <div className="flex items-center gap-3">
             <a
-              href="/auth"
+              href={appLoginUrl()}
               className="hidden sm:inline-flex px-4 py-2 rounded-xl border border-white/10 bg-white/5
                          text-white/70 hover:text-white hover:bg-white/10 transition"
             >
