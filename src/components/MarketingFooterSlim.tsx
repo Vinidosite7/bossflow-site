@@ -58,15 +58,15 @@ export default function MarketingFooterSlim() {
           </div>
 
           {/* Legal */}
-          <div>
-            <div className="text-white/80 font-extrabold text-xs uppercase tracking-widest">
-              Legal
-            </div>
-            <div className="mt-4 space-y-3 text-sm text-white/60">
-              <Link className="block hover:text-white transition" to="/privacidade">Privacidade</Link>
-              <Link className="block hover:text-white transition" to="/termos">Termos</Link>
-            </div>
-          </div>
+<div>
+  <div className="text-white/80 font-extrabold text-xs uppercase tracking-widest">
+    Legal
+  </div>
+  <div className="mt-4 space-y-3 text-sm text-white/60">
+    <Link className="block hover:text-white transition" to="/privacidade">Privacidade</Link>
+    <Link className="block hover:text-white transition" to="/termos">Termos</Link>
+  </div>
+</div>
         </div>
 
         {/* Bottom bar */}

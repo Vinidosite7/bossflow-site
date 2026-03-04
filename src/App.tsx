@@ -2,10 +2,11 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Home from "./pages/Home";
 import Pricing from "./pages/Pricing";
-import Terms from "./pages/Terms";
 import RedirectToApp from "./pages/RedirectToApp";
 import HomePro from "./pages/HomePro";
 import Support from "./pages/Support";
+import Termos from './pages/Termos'
+import Privacidade from './pages/Privacidade.tsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -22,9 +23,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/precos" element={<Pricing />} />
-        <Route path="/termos" element={<Terms />} />
         <Route path="/suporte" element={<Support />} />
         <Route path="/pro" element={<HomePro />} />
+        <Route path="/termos" element={<Termos />} />
+<Route path="/privacidade" element={<Privacidade />} />
 
         {/* rotas "tipo utmfy" que mandam pro app */}
         <Route path="/login" element={<RedirectToApp to="login" />} />
