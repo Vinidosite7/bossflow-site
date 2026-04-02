@@ -129,8 +129,6 @@ export default function Home() {
   const smy = useSpring(my, { stiffness: 120, damping: 18, mass: 0.2 });
   const glowX = useTransform(smx, (v) => `${v}px`);
   const glowY = useTransform(smy, (v) => `${v}px`);
-  const blob1Y = useTransform(scrollYProgress, [0, 0.22], [0, 70]);
-  const blob2Y = useTransform(scrollYProgress, [0, 0.22], [0, 95]);
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -155,8 +153,8 @@ export default function Home() {
           {/* Background */}
           <div className="absolute inset-0 -z-10">
             <div className="absolute inset-0 bg-gradient-to-b from-[#09090f] via-[#0d0d1a] to-[#09090f]" />
-            <motion.div style={{ y: blob1Y }} className="absolute -top-40 -right-48 h-[420px] w-[420px] rounded-full bg-brand/10 blur-3xl" />
-            <motion.div style={{ y: blob2Y }} className="absolute -top-56 -left-48 h-[380px] w-[380px] rounded-full bg-brand2/8 blur-3xl" />
+            <div className="absolute -top-40 -right-48 h-[420px] w-[420px] rounded-full bg-brand/10 blur-3xl" />
+            <div className="absolute -top-56 -left-48 h-[380px] w-[380px] rounded-full bg-brand2/8 blur-3xl" />
             <div
               className="absolute inset-0 opacity-[0.07]"
               style={{
