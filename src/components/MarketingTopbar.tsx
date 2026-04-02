@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { appLoginUrl, appRegisterUrl } from "../lib/links";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
-type Active = "home" | "precos" | "suporte";
+type Active = "home" | "precos" | "suporte" | "pro";
 
 type Props = {
   active?: Active;
@@ -17,22 +17,24 @@ export default function MarketingTopbar({ active }: Props) {
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 22, mass: 0.2 });
 
-  // Header “fica mais sólido” com scroll
+  // Header "fica mais sólido" com scroll
   const bgOpacity = useTransform(scrollYProgress, [0, 0.06], [0.65, 0.9]);
 
   const ctaLabel =
     a === "precos" ? "Começar agora" : a === "suporte" ? "Abrir chamado" : "Criar conta grátis";
 
   // Mobile menu
+  const pathname = location.pathname;
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    setOpen(false); // fecha ao trocar rota
-  }, [location.pathname]);
+
+  // Deriva: fecha automaticamente ao trocar rota sem useEffect
+  const isOpen = open && pathname === location.pathname;
 
   const navItems = useMemo(
     () => [
       { to: "/", label: "Home", key: "home" as const },
       { to: "/precos", label: "Preços", key: "precos" as const },
+      { to: "/pro", label: "Pro", key: "pro" as const },
       { to: "/suporte", label: "Suporte", key: "suporte" as const },
     ],
     []
@@ -49,7 +51,7 @@ export default function MarketingTopbar({ active }: Props) {
       <motion.header
         className="sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl"
         style={{
-          backgroundColor: `rgba(5,10,24, ${bgOpacity.get()})`,
+          backgroundColor: `rgba(9,9,15, ${bgOpacity.get()})`,
         }}
       >
         <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
@@ -85,7 +87,7 @@ export default function MarketingTopbar({ active }: Props) {
               href={appRegisterUrl()}
               className="group relative overflow-hidden inline-flex items-center justify-center px-5 py-2.5 rounded-xl
                          bg-gradient-to-r from-brand2 to-brand
-                         text-[#06163a] font-extrabold text-sm
+                         text-white font-extrabold text-sm
                          hover:opacity-95 transition"
             >
               {/* shine */}
@@ -104,9 +106,9 @@ export default function MarketingTopbar({ active }: Props) {
               className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl
                          border border-white/10 bg-white/5 hover:bg-white/10 transition"
               aria-label="Abrir menu"
-              aria-expanded={open}
+              aria-expanded={isOpen}
             >
-              <span className="text-white/80 text-lg">{open ? "✕" : "☰"}</span>
+              <span className="text-white/80 text-lg">{isOpen ? "✕" : "☰"}</span>
             </button>
           </div>
         </div>
@@ -114,7 +116,7 @@ export default function MarketingTopbar({ active }: Props) {
         {/* Mobile menu (animado) */}
         <motion.div
           initial={false}
-          animate={open ? "open" : "closed"}
+          animate={isOpen ? "open" : "closed"}
           variants={{
             open: { height: "auto", opacity: 1 },
             closed: { height: 0, opacity: 0 },
@@ -175,5 +177,6 @@ function NavItem({ to, label, active }: { to: string; label: string; active: boo
 function inferActive(pathname: string): Active {
   if (pathname.startsWith("/precos")) return "precos";
   if (pathname.startsWith("/suporte")) return "suporte";
+  if (pathname.startsWith("/pro")) return "pro";
   return "home";
 }

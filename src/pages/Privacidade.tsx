@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom'
 
-const sections = [
+type Section = {
+  n: string
+  title: string
+  body: string[]
+  bullets?: string[]
+  highlight?: boolean
+}
+
+const sections: Section[] = [
   {
     n: '1', title: 'Introdução',
     body: [
@@ -65,6 +73,7 @@ const sections = [
   },
   {
     n: '7', title: 'Segurança dos Dados',
+    highlight: true,
     body: ['Adotamos medidas técnicas e organizacionais para proteger seus dados:'],
     bullets: [
       'Criptografia em trânsito (HTTPS/TLS)',
@@ -76,6 +85,7 @@ const sections = [
   },
   {
     n: '8', title: 'Seus Direitos como Titular',
+    highlight: true,
     body: ['Nos termos da LGPD, você tem direito a:'],
     bullets: [
       'Confirmação e acesso: saber quais dados temos sobre você',
@@ -107,111 +117,210 @@ const sections = [
   },
   {
     n: '12', title: 'Encarregado de Dados (DPO)',
-    body: [
-      'Nosso Encarregado de Proteção de Dados pode ser contatado pelo e-mail: privacidade@bossflow.pro',
-    ],
+    body: ['Nosso Encarregado de Proteção de Dados pode ser contatado pelo e-mail: privacidade@bossflow.pro'],
   },
 ]
 
+const accent = '#34d399'
+const accentRgb = '52,211,153'
+const purple = '#7c6ef7'
+const purpleRgb = '124,110,247'
+
 export default function Privacidade() {
   return (
-    <div style={{ background: '#06060c', minHeight: '100vh', color: '#d0d0e0' }}>
+    <div style={{ background: '#06060f', minHeight: '100vh', color: '#d0d0e0', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
+
+      {/* Glow de fundo */}
+      <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
+        <div style={{
+          position: 'absolute', top: -100, left: '50%', transform: 'translateX(-50%)',
+          width: 800, height: 500,
+          background: `radial-gradient(ellipse at 50% 0%, rgba(${accentRgb},0.12), transparent 70%)`,
+        }} />
+      </div>
 
       {/* Header */}
       <header style={{
         borderBottom: '1px solid rgba(255,255,255,0.06)',
-        padding: '20px 24px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        position: 'sticky',
-        top: 0,
-        background: 'rgba(6,6,12,0.9)',
-        backdropFilter: 'blur(12px)',
-        zIndex: 10,
+        padding: '18px 32px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        position: 'sticky', top: 0, zIndex: 20,
+        background: 'rgba(6,6,15,0.85)',
+        backdropFilter: 'blur(16px)',
       }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
           <img src="/bossflow.png" alt="BossFlow" style={{ height: 26, objectFit: 'contain' }} />
         </Link>
         <Link to="/" style={{
-          fontSize: 13, fontWeight: 600, color: '#7c6ef7',
-          textDecoration: 'none', padding: '8px 16px', borderRadius: 10,
-          background: 'rgba(124,110,247,0.08)', border: '1px solid rgba(124,110,247,0.2)',
+          fontSize: 13, fontWeight: 600, color: purple,
+          textDecoration: 'none', padding: '7px 16px', borderRadius: 10,
+          background: `rgba(${purpleRgb},0.08)`,
+          border: `1px solid rgba(${purpleRgb},0.2)`,
         }}>
-          ← Voltar
+          ← Voltar ao site
         </Link>
       </header>
 
       {/* Conteúdo */}
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '60px 24px 80px' }}>
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: 780, margin: '0 auto', padding: '72px 24px 100px' }}>
 
-        {/* Título */}
-        <div style={{ marginBottom: 48 }}>
+        {/* Hero */}
+        <div style={{ marginBottom: 56, textAlign: 'center' }}>
           <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 6,
-            padding: '6px 12px', borderRadius: 999, marginBottom: 20,
-            background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.2)',
-            fontSize: 12, fontWeight: 600, color: '#34d399',
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            padding: '6px 14px', borderRadius: 999, marginBottom: 24,
+            background: `rgba(${accentRgb},0.08)`,
+            border: `1px solid rgba(${accentRgb},0.2)`,
+            fontSize: 12, fontWeight: 600, color: accent, letterSpacing: '0.05em',
           }}>
-            🔒 LGPD — Conformidade
+            🔒 LGPD — CONFORMIDADE
           </div>
+
           <h1 style={{
             fontFamily: 'Syne, sans-serif',
-            fontSize: 'clamp(28px, 5vw, 40px)',
+            fontSize: 'clamp(32px, 6vw, 52px)',
             fontWeight: 800,
-            color: '#e8e8f0',
-            marginBottom: 12,
-            lineHeight: 1.2,
+            color: '#f0f0f8',
+            margin: '0 0 16px',
+            lineHeight: 1.1,
+            letterSpacing: '-0.02em',
           }}>
             Política de Privacidade
           </h1>
-          <p style={{ color: '#3a3a5c', fontSize: 14 }}>
+
+          <p style={{ fontSize: 15, color: '#5a5a7a', margin: '0 0 8px' }}>
             Última atualização: 04 de março de 2026
+          </p>
+
+          <div style={{
+            width: 48, height: 3, borderRadius: 99, margin: '24px auto 0',
+            background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
+          }} />
+        </div>
+
+        {/* Card intro */}
+        <div style={{
+          padding: '22px 28px', borderRadius: 16, marginBottom: 40,
+          background: `rgba(${accentRgb},0.04)`,
+          border: `1px solid rgba(${accentRgb},0.15)`,
+          display: 'flex', gap: 16, alignItems: 'flex-start',
+        }}>
+          <div style={{
+            width: 36, height: 36, borderRadius: 10, flexShrink: 0, marginTop: 2,
+            background: `rgba(${accentRgb},0.1)`,
+            border: `1px solid rgba(${accentRgb},0.25)`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 16,
+          }}>🛡️</div>
+          <p style={{ fontSize: 14, color: '#7a7a9a', lineHeight: 1.75, margin: 0 }}>
+            Sua privacidade é importante para nós. Esta política explica de forma clara e transparente como o BossFlow coleta, utiliza e protege seus dados, em total conformidade com a{' '}
+            <strong style={{ color: accent, fontWeight: 600 }}>LGPD (Lei nº 13.709/2018)</strong>.
           </p>
         </div>
 
-        {/* Intro */}
+        {/* Destaque "não vendemos dados" */}
         <div style={{
-          padding: '20px 24px', borderRadius: 16, marginBottom: 48,
-          background: 'rgba(52,211,153,0.04)',
-          border: '1px solid rgba(52,211,153,0.15)',
+          padding: '16px 22px', borderRadius: 12, marginBottom: 56,
+          background: 'rgba(255,255,255,0.02)',
+          border: '1px solid rgba(255,255,255,0.06)',
+          display: 'flex', alignItems: 'center', gap: 12,
         }}>
-          <p style={{ fontSize: 14, color: '#6b6b8a', lineHeight: 1.7, margin: 0 }}>
-            Sua privacidade é importante para nós. Esta política explica de forma clara e transparente como o BossFlow coleta, utiliza e protege seus dados, em total conformidade com a <strong style={{ color: '#34d399' }}>LGPD (Lei nº 13.709/2018)</strong>.
+          <span style={{ fontSize: 18 }}>✅</span>
+          <p style={{ fontSize: 13, color: '#5a5a7a', margin: 0, lineHeight: 1.6 }}>
+            <strong style={{ color: '#9a9ab8', fontWeight: 600 }}>Não vendemos seus dados.</strong>{' '}
+            Nunca vendemos, alugamos ou trocamos informações pessoais com terceiros para fins de marketing.
           </p>
+        </div>
+
+        {/* Índice */}
+        <div style={{
+          padding: '20px 24px', borderRadius: 14, marginBottom: 56,
+          background: 'rgba(255,255,255,0.02)',
+          border: '1px solid rgba(255,255,255,0.06)',
+        }}>
+          <p style={{ fontSize: 11, fontWeight: 700, color: '#3a3a5a', letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 14px' }}>
+            Índice
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 20px' }}>
+            {sections.map(s => (
+              <a key={s.n} href={`#s${s.n}`} style={{
+                fontSize: 13, color: '#5a5a7a', textDecoration: 'none',
+                display: 'flex', alignItems: 'center', gap: 6,
+              }}
+                onMouseEnter={e => (e.currentTarget.style.color = accent)}
+                onMouseLeave={e => (e.currentTarget.style.color = '#5a5a7a')}>
+                <span style={{ fontSize: 11, color: accent, fontWeight: 700 }}>{s.n}.</span>
+                {s.title}
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Seções */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
-          {sections.map(s => (
-            <div key={s.n}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          {sections.map((s, idx) => (
+            <div key={s.n} id={`s${s.n}`} style={{
+              padding: '28px 32px',
+              borderRadius: 16,
+              marginBottom: 8,
+              background: s.highlight
+                ? `rgba(${accentRgb},0.04)`
+                : idx % 2 === 0 ? 'rgba(255,255,255,0.015)' : 'transparent',
+              border: s.highlight
+                ? `1px solid rgba(${accentRgb},0.18)`
+                : '1px solid rgba(255,255,255,0.04)',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20 }}>
                 <div style={{
-                  width: 32, height: 32, borderRadius: 10, flexShrink: 0,
-                  background: 'rgba(52,211,153,0.08)', border: '1px solid rgba(52,211,153,0.2)',
+                  width: 34, height: 34, borderRadius: 10, flexShrink: 0,
+                  background: s.highlight
+                    ? `rgba(${accentRgb},0.15)`
+                    : `rgba(${accentRgb},0.07)`,
+                  border: `1px solid rgba(${accentRgb},${s.highlight ? '0.35' : '0.18'})`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 12, fontWeight: 700, color: '#34d399',
+                  fontSize: 12, fontWeight: 800, color: accent,
+                  fontFamily: 'Syne, sans-serif',
                 }}>
                   {s.n}
                 </div>
                 <h2 style={{
                   fontFamily: 'Syne, sans-serif',
-                  fontSize: 18, fontWeight: 700,
-                  color: '#e8e8f0', margin: 0,
+                  fontSize: 17, fontWeight: 700,
+                  color: '#e0e0f0', margin: 0, letterSpacing: '-0.01em',
                 }}>
                   {s.title}
                 </h2>
+                {s.highlight && (
+                  <span style={{
+                    marginLeft: 'auto', fontSize: 11, fontWeight: 700,
+                    padding: '3px 10px', borderRadius: 99,
+                    background: `rgba(${accentRgb},0.1)`,
+                    color: accent, letterSpacing: '0.04em',
+                  }}>
+                    SEUS DIREITOS
+                  </span>
+                )}
               </div>
 
               {s.body?.map((p, i) => (
-                <p key={i} style={{ fontSize: 14, color: '#6b6b8a', lineHeight: 1.75, marginBottom: 12, marginLeft: 44 }}
+                <p key={i} style={{
+                  fontSize: 14, color: '#6a6a8a', lineHeight: 1.8,
+                  marginBottom: 10, marginLeft: 48,
+                }}
                   dangerouslySetInnerHTML={{ __html: p }} />
               ))}
 
               {s.bullets && (
-                <ul style={{ marginLeft: 44, marginBottom: 12, paddingLeft: 16 }}>
+                <ul style={{ marginLeft: 48, marginBottom: 10, paddingLeft: 0, listStyle: 'none' }}>
                   {s.bullets.map((b, i) => (
-                    <li key={i} style={{ fontSize: 14, color: '#6b6b8a', lineHeight: 1.75, marginBottom: 6 }}>
+                    <li key={i} style={{
+                      fontSize: 14, color: '#6a6a8a', lineHeight: 1.75,
+                      marginBottom: 8, display: 'flex', alignItems: 'flex-start', gap: 10,
+                    }}>
+                      <span style={{
+                        width: 5, height: 5, borderRadius: '50%', flexShrink: 0, marginTop: 8,
+                        background: accent, opacity: 0.5,
+                      }} />
                       {b}
                     </li>
                   ))}
@@ -219,7 +328,13 @@ export default function Privacidade() {
               )}
 
               {s.bodyAfter?.map((p, i) => (
-                <p key={i} style={{ fontSize: 14, color: '#6b6b8a', lineHeight: 1.75, marginBottom: 12, marginLeft: 44 }}>
+                <p key={i} style={{
+                  fontSize: 13, color: '#5a5a78', lineHeight: 1.75,
+                  marginBottom: 0, marginLeft: 48,
+                  borderLeft: `2px solid rgba(${accentRgb},0.2)`,
+                  paddingLeft: 14, marginTop: 12,
+                  fontStyle: 'italic',
+                }}>
                   {p}
                 </p>
               ))}
@@ -228,26 +343,45 @@ export default function Privacidade() {
         </div>
 
         {/* Divider */}
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '56px 0 40px' }} />
+        <div style={{
+          height: 1, margin: '64px 0 48px',
+          background: `linear-gradient(90deg, transparent, rgba(${accentRgb},0.2), transparent)`,
+        }} />
 
-        {/* Footer */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center', textAlign: 'center' }}>
-          <p style={{ fontSize: 13, color: '#3a3a5c' }}>
-            Dúvidas sobre privacidade?{' '}
-            <a href="mailto:privacidade@bossflow.pro" style={{ color: '#34d399', textDecoration: 'none' }}>
-              privacidade@bossflow.pro
-            </a>
+        {/* Footer CTA */}
+        <div style={{
+          textAlign: 'center',
+          padding: '40px 32px',
+          borderRadius: 20,
+          background: `rgba(${accentRgb},0.03)`,
+          border: `1px solid rgba(${accentRgb},0.1)`,
+        }}>
+          <p style={{ fontSize: 15, fontWeight: 600, color: '#c0c0dc', margin: '0 0 8px', fontFamily: 'Syne, sans-serif' }}>
+            Dúvidas sobre sua privacidade?
           </p>
-          <div style={{ display: 'flex', gap: 16 }}>
-            <Link to="/termos" style={{ fontSize: 13, color: '#3a3a5c', textDecoration: 'none' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#7c6ef7')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#3a3a5c')}>
+          <p style={{ fontSize: 13, color: '#5a5a7a', margin: '0 0 24px' }}>
+            Nosso DPO responde em até 15 dias úteis, conforme a LGPD.
+          </p>
+          <a href="mailto:privacidade@bossflow.pro" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            padding: '11px 24px', borderRadius: 12, fontSize: 14, fontWeight: 600,
+            color: '#06060f', textDecoration: 'none',
+            background: accent,
+            boxShadow: `0 4px 24px rgba(${accentRgb},0.25)`,
+          }}>
+            privacidade@bossflow.pro
+          </a>
+
+          <div style={{ display: 'flex', gap: 20, justifyContent: 'center', marginTop: 28 }}>
+            <Link to="/termos" style={{ fontSize: 13, color: '#4a4a6a', textDecoration: 'none' }}
+              onMouseEnter={e => (e.currentTarget.style.color = accent)}
+              onMouseLeave={e => (e.currentTarget.style.color = '#4a4a6a')}>
               Termos de Uso
             </Link>
             <span style={{ color: '#2a2a3e' }}>·</span>
-            <Link to="/" style={{ fontSize: 13, color: '#3a3a5c', textDecoration: 'none' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#7c6ef7')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#3a3a5c')}>
+            <Link to="/" style={{ fontSize: 13, color: '#4a4a6a', textDecoration: 'none' }}
+              onMouseEnter={e => (e.currentTarget.style.color = accent)}
+              onMouseLeave={e => (e.currentTarget.style.color = '#4a4a6a')}>
               Voltar ao site
             </Link>
           </div>

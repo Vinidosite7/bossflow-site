@@ -36,8 +36,15 @@ export default function MarketingFAQ() {
       {
         id: "faq-limites",
         q: "Tem limite de lançamentos / transações?",
-        a: "Depende do plano. A ideia é você escolher um plano que acompanhe seu volume sem travar sua operação.",
+        a: "No plano Básico, o histórico fica disponível por 30 dias e há limites de clientes (50) e tarefas ativas (20). No Starter e acima, tudo é ilimitado — histórico completo, clientes e tarefas sem teto.",
         icon: <IconGauge />,
+      },
+      {
+        id: "faq-ia",
+        q: "O que é a Bia?",
+        a: "É um assistente financeiro integrado ao BossFlow. Você manda uma foto de nota fiscal e ele cria o lançamento automaticamente. Digita 'gastei 200 no mercado' e ele registra. Pergunta 'quanto lucrei esse mês?' e ele responde com base nos seus dados reais. Disponível no plano Starter+.",
+        icon: <IconBot />,
+        popular: true,
       },
       {
         id: "faq-exportar",
@@ -373,6 +380,18 @@ function IconHeadset() {
       <path d="M4 14h3v6H6a2 2 0 0 1-2-2v-4Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
       <path d="M20 14h-3v6h1a2 2 0 0 0 2-2v-4Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
       <path d="M12 20c1.8 0 3-.6 3-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconBot() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="opacity-90">
+      <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" strokeWidth="2" />
+      <path d="M12 2v4M9 2h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="9" cy="16" r="1.5" fill="currentColor" />
+      <circle cx="15" cy="16" r="1.5" fill="currentColor" />
+      <path d="M9 20h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
